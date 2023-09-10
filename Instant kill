@@ -1,0 +1,13 @@
+local old 
+local targetRemote = "DamageRemote"  
+
+old = hookmetamethod(game, "__namecall", function(self, ...)
+    
+    local args = {...}
+    if getnamecallmethod() == "FireServer" then 
+        if tostring(self) == targetRemote then 
+            args[3] = 100  -- Damage
+        end
+    end
+    return old(self, unpack(args))
+end)
